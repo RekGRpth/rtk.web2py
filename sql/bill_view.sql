@@ -5,11 +5,13 @@ select      row_number() OVER () as id,
             contract_date,
             udecodeentities_numeric(regexp_replace(regexp_replace(bc.name, E'[ \t\r\n]+', ' ', 'g'), E' +$', '', 'g')) as client_name
 from        base_clients as bc
+inner join  telephone_services as s using (oper_id, client_id)
 inner join  contract_contracts as cc using (oper_id, client_id)
 inner join  bill_bills as bb using (oper_id, client_id)
 where       oper_id = 'RC'
 and         contract_type ~* 'rt_contract'
 and         (bill_type ~* 'invoice_RTK' or bill_type ~* 'invoice_USI') and bill_date between date_trunc('month', now()) - interval '1 month' and date_trunc('month', now()) - interval '1 sec'
+and         (date_create >= date_trunc('month', now()) - interval '1 month' or contract_date between date_trunc('month', now()) - interval '1 month' and date_trunc('month', now()) - interval '1 sec')
 --limit       10
 
 /*
