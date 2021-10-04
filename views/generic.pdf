@@ -1,0 +1,12 @@
+{{
+import os
+from mygenerics import pdf_from_html
+filename = '%s/%s.html' % (request.controller,request.function)
+if os.path.exists(os.path.join(request.folder,'views',filename)):
+   html=response.render(filename)
+else:
+   html=HTML(HEAD(META(_content='text/html; charset=utf-8', **{'_http-equiv': 'content-type'})), BODY(BEAUTIFY(response._vars[next(iter(response._vars))] if len(response._vars) == 1 else response._vars))).xml()
+pass
+response.headers['Content-Type'] = 'application/pdf'
+raise HTTP(200, pdf_from_html(html), **response.headers)
+}}

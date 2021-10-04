@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+{{"""
+
+You should not modify this file. 
+It is used as default when a view is not provided for your controllers
+
+"""}}
+{{if len(response._vars)==1:}}
+{{=BEAUTIFY(response._vars[next(iter(response._vars))])}}
+{{else:}}
+{{for key, value in response._vars.items():}}
+<h2>{{=key}}</h2>{{=BEAUTIFY(value)}}
+{{pass}}{{pass}}

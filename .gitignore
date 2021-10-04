@@ -1,0 +1,14 @@
+*~
+*.pyc
+*.pyo
+*.bak
+*.bak2
+*.js.gz
+*.css.gz
+cache/*
+private/*
+uploads/*
+databases/*
+sessions/*
+errors/*
+progress.log

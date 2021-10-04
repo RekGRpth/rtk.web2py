@@ -1,0 +1,3 @@
+@reboot root **scripts/zip_static_files.py
+@hourly root *scripts/sessions2trash.py
+@daily root **site-packages/mylanguages.py
