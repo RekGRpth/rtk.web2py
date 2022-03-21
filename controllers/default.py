@@ -26,7 +26,7 @@ def index():
             formname='_'.join((db._adapter.driver_args['database'], tablename)),
             links=[],
             maxtextlength=512,
-            user_signature=True,
+            user_signature=False,
         )
         table = db[tablename]
         if 'id' in table:
@@ -39,9 +39,9 @@ def index():
     return grids
 
 @auth.requires_login()
-def load(): return CAT(
+def load(): return dict(link=CAT(
     A('Счета', _href=URL('bill_load'))
-)
+))
 
 @auth.requires_login()
 def bill_load():
